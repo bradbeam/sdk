@@ -58,9 +58,17 @@ type (
 		Span       float32   `json:"span"`                 // general
 		Links      []link    `json:"links,omitempty"`      // general
 		Datasource *string   `json:"datasource,omitempty"` // metrics
-		Height     *string   `json:"height,omitempty"`     // general
-		Renderer   *string   `json:"renderer,omitempty"`   // display styles
-		Repeat     *string   `json:"repeat,omitempty"`     // templating options
+		DashLength int       `json:"dashLength,omitempty"`
+		Dashes     bool      `json:"dashes,omitempty"`
+		GridPos    *struct {
+			H int `json:"h,omitempty"`
+			W int `json:"w,omitempty"`
+			X int `json:"x,omitempty"`
+			Y int `json:"y,omitempty"`
+		} `json:"gridPos,omitempty"`
+		Height   *string `json:"height,omitempty"`   // general
+		Renderer *string `json:"renderer,omitempty"` // display styles
+		Repeat   string  `json:"repeat,omitempty"`   // templating options
 		//RepeatIteration *int64   `json:"repeatIteration,omitempty"`
 		RepeatPanelID *uint `json:"repeatPanelId,omitempty"`
 		ScopedVars    map[string]struct {
@@ -68,6 +76,7 @@ type (
 			Text     string `json:"text"`
 			Value    string `json:"value"`
 		} `json:"scopedVars,omitempty"`
+		SpaceLength      int      `json:"spaceLength,omitempty"`
 		Transparent      bool     `json:"transparent"`
 		MinSpan          *float32 `json:"minSpan,omitempty"` // templating options
 		Type             string   `json:"type"`
@@ -75,6 +84,8 @@ type (
 		IsNew            bool     `json:"isNew"`
 		Editable         bool     `json:"editable"`
 		HideTimeOverride *bool    `json:"hideTimeOverride,omitempty"`
+		SchemaVersion    int      `json:"schemaVersion,omitempty"`
+		Style            string   `json:"style,omitempty"`
 	}
 	GraphPanel struct {
 		AliasColors interface{} `json:"aliasColors"` // XXX

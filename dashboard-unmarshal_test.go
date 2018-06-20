@@ -176,3 +176,33 @@ func TestUnmarshal_DashboardWithMixedYaxes(t *testing.T) {
 		t.Errorf("panel #1 has wrong max value: %d, expected: %d", max4.Value, 100)
 	}
 }
+
+func TestUnmarshal_DashboardG5(t *testing.T) {
+	var board Board
+	raw, _ := ioutil.ReadFile("testdata/prometheus-g5.json")
+
+	err := json.Unmarshal(raw, &board)
+
+	if err != nil {
+		t.Error(err)
+	}
+
+	if len(board.Panels) != 40 {
+		t.Error("number of panels in dashboard had wrong value: %d, expected: %d", len(board.Panels), 40)
+	}
+
+	/*
+		var buf bytes.Buffer
+		if err := json.Indent(&buf, raw, "", "  "); err != nil {
+			panic(err)
+		}
+		t.Log(buf.String())
+	*/
+
+	//t.Logf("%+v", board)
+	/*
+		if board.Templating.List[1].Hide != TemplatingHideVariable {
+			t.Errorf("templating has hidden variable '%d', got %d", TemplatingHideVariable, board.Templating.List[1].Hide)
+		}
+	*/
+}
